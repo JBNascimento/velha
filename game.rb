@@ -1,9 +1,18 @@
 class Game
   def initialize
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
-    @com = "X" # the computer's marker
-    @hum = "O" # the user's marker
+    @com = "#{green('0')}" # the computer's marker
+    @hum = "#{red('X')}" # the user's marker
   end
+
+  # colors
+  def colorize(text, color_code)
+    "#{color_code}#{text}\e[0m"
+  end
+    
+  def red(text); colorize(text, "\e[31m"); end
+  def green(text); colorize(text, "\e[32m"); end
+    
 
   def start_game
     # start by printing the board
