@@ -1,8 +1,8 @@
 class Game
   def initialize
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
-    @com = "#{green('0')}" # the computer's marker
-    @hum = "#{red('X')}" # the user's marker
+    @com = "#{red('X')}" # the computer's marker
+    @hum =  "#{green('O')}" # the user's marker
   end
 
   # colors
@@ -16,15 +16,21 @@ class Game
 
   def start_game
     # start by printing the board
-    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
-    puts "Enter [0-8]:"
+    puts "\n"
+    puts "--------------------------------------------"
+    puts "YOU WON'T BEAT ME. BUT, DO YOU WANT TRY? ;)" 
+    puts "--------------------------------------------"
+    puts "\n"   
+    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n---+---+---\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n---+---+---\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+    puts "\n" 
+    puts "Choose your move! Enter a number between 0 and 8:"
     # loop through until the game was won or tied
     until game_is_over(@board) || tie(@board)
       get_human_spot
       if !game_is_over(@board) && !tie(@board)
         eval_board
       end
-      puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+      puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n---+---+---\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n---+---+---\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
     end
     puts "Game over"
   end
@@ -33,6 +39,7 @@ class Game
     spot = nil
     until spot
       spot = gets.chomp.to_i
+      puts "You chose: #{spot}"
       if @board[spot] != "X" && @board[spot] != "O"
         @board[spot] = @hum
       else
@@ -104,7 +111,7 @@ class Game
   end
 
   def tie(b)
-    b.all? { |s| s == "X" || s == "O" }
+    b.all? { |s| s == "X" || s == "O" }    
   end
 
 end
