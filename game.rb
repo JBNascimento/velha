@@ -39,23 +39,22 @@ class Game
     spot = nil
     until spot
 
-      spot = gets.chomp
+      spot_temp = gets.chomp
       # Valid Input        
       valid =*("0".."8")
-      if !valid.include? spot
+      while !valid.include? spot_temp
         puts "#{red('Invalid Character!')} Enter a number between 0 and 8:"
+        spot_temp = gets.chomp       
+      end        
+             
+      spot = spot_temp.to_i
+      puts "You chose: #{spot}"
+      if @board[spot] != "#{red('X')}" && @board[spot] != "#{green('O')}"
+        @board[spot] = @hum
       else
-        
-        puts "YES"      
-
-        spot = spot.to_i
-        puts "You chose: #{spot}"
-        if @board[spot] != "#{red('X')}" && @board[spot] != "#{green('O')}"
-          @board[spot] = @hum
-        else
-          spot = nil
-        end
+        spot = nil
       end
+      
     end
   end
      
