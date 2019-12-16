@@ -24,6 +24,7 @@ class Game
     puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n---+---+---\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n---+---+---\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
     puts "\n" 
     puts "Choose your move! Enter a number between 0 and 8:"
+
     # loop through until the game was won or tied
     until game_is_over(@board) || tie(@board)
       get_human_spot
@@ -33,6 +34,7 @@ class Game
       puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n---+---+---\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n---+---+---\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
     end
     puts "Game over"
+    check_result(@board)
   end
 
   def get_human_spot
@@ -120,6 +122,35 @@ class Game
     [b[2], b[4], b[6]].uniq.length == 1
   end
 
+  def check_result(b)
+    if
+      [b[0], b[1], b[2]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"] ||
+      [b[3], b[4], b[5]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"] ||
+      [b[6], b[7], b[8]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"] ||
+      [b[0], b[3], b[6]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"] ||
+      [b[1], b[4], b[7]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"] ||
+      [b[2], b[5], b[8]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"] ||
+      [b[0], b[4], b[8]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"] ||
+      [b[2], b[4], b[6]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"]
+
+        puts  "You Lose"
+    elsif  
+      [b[0], b[1], b[2]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
+      [b[3], b[4], b[5]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
+      [b[6], b[7], b[8]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
+      [b[0], b[3], b[6]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
+      [b[1], b[4], b[7]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
+      [b[2], b[5], b[8]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
+      [b[0], b[4], b[8]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
+      [b[2], b[4], b[6]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"]
+
+        puts  "You Win"
+    else
+        puts  "Tie!"
+    end
+  end
+
+  
   def tie(b)
     b.all? { |s| s == "#{red('X')}" || s == "#{green('O')}" }    
   end
