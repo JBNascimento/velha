@@ -12,6 +12,7 @@ class Game
     
   def red(text); colorize(text, "\e[31m"); end
   def green(text); colorize(text, "\e[32m"); end
+  def yellow(text); colorize(text, "\e[33m"); end
     
 
   def start_game
@@ -32,18 +33,20 @@ class Game
         eval_board
       end
       puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n---+---+---\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n---+---+---\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
-    end
-    puts "Game over"
-    check_result(@board)
+    end    
+     puts "\n" 
+     puts "---------- GAME OVER ----------"     
+     check_result(@board)
+     puts "\n"
   end
 
   def get_human_spot
     spot = nil
     until spot
-
       spot_temp = gets.chomp
       # Valid Input        
       valid =*("0".."8")
+      
       while !valid.include? spot_temp
         puts "#{red('Invalid Character!')} Enter a number between 0 and 8:"
         spot_temp = gets.chomp       
@@ -55,8 +58,7 @@ class Game
         @board[spot] = @hum
       else
         spot = nil
-      end
-      
+      end      
     end
   end
      
@@ -133,7 +135,7 @@ class Game
       [b[0], b[4], b[8]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"] ||
       [b[2], b[4], b[6]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"]
 
-        puts  "You Lose"
+        puts red(loser_sentences.sample)
     elsif  
       [b[0], b[1], b[2]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
       [b[3], b[4], b[5]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
@@ -144,12 +146,23 @@ class Game
       [b[0], b[4], b[8]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
       [b[2], b[4], b[6]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"]
 
-        puts  "You Win"
-    else
-        puts  "Tie!"
+      puts green(winner_sentences.sample)
+    else       
+      puts yellow(tie_sentences.sample)
     end
   end
 
+  def loser_sentences
+    messages = ["YOU LOSE! Easy peasy...", "YOU LOSE! Were you even trying?", "YOU LOSE! You have a lot to learn, human"]
+  end 
+
+  def winner_sentences 
+    messages = ["YOU WON! Are you sure you are human?", "YOU WON! Were you using cheats?", "YOU WON! Humm... We have a Jedi here"]
+  end 
+
+  def tie_sentences
+    messages = ["TIE! I see that you studied a little", "TIE! I see someone is leveling up here", "TIE! I was not on my best days..."]
+  end 
   
   def tie(b)
     b.all? { |s| s == "#{red('X')}" || s == "#{green('O')}" }    
