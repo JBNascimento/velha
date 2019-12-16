@@ -38,16 +38,27 @@ class Game
   def get_human_spot
     spot = nil
     until spot
-      spot = gets.chomp.to_i
-      puts "You chose: #{spot}"
-      if @board[spot] != "X" && @board[spot] != "O"
-        @board[spot] = @hum
+
+      spot = gets.chomp
+      # Valid Input        
+      valid =*("0".."8")
+      if !valid.include? spot
+        puts "#{red('Invalid Character!')} Enter a number between 0 and 8:"
       else
-        spot = nil
+        
+        puts "YES"      
+
+        spot = spot.to_i
+        puts "You chose: #{spot}"
+        if @board[spot] != "#{red('X')}" && @board[spot] != "#{green('O')}"
+          @board[spot] = @hum
+        else
+          spot = nil
+        end
       end
     end
   end
-
+     
   def eval_board
     spot = nil
     until spot
@@ -56,7 +67,7 @@ class Game
         @board[spot] = @com
       else
         spot = get_best_move(@board, @com)
-        if @board[spot] != "X" && @board[spot] != "O"
+        if @board[spot] != "#{red('X')}" && @board[spot] != "#{green('O')}"
           @board[spot] = @com
         else
           spot = nil
@@ -69,7 +80,7 @@ class Game
     available_spaces = []
     best_move = nil
     board.each do |s|
-      if s != "X" && s != "O"
+      if s != "#{red('X')}" && s != "#{green('O')}"
         available_spaces << s
       end
     end
@@ -111,7 +122,7 @@ class Game
   end
 
   def tie(b)
-    b.all? { |s| s == "X" || s == "O" }    
+    b.all? { |s| s == "#{red('X')}" || s == "#{green('O')}" }    
   end
 
 end
