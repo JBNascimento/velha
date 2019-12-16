@@ -1,8 +1,8 @@
 class Game
   def initialize
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
-    @com = "#{red('X')}" # the computer's marker
-    @hum =  "#{green('O')}" # the user's marker
+    @com = red('X') # the computer's marker
+    @hum = green('O') # the user's marker
   end
 
   # colors
@@ -46,7 +46,6 @@ class Game
       spot_temp = gets.chomp
       # Valid Input        
       valid =*("0".."8")
-      
       while !valid.include? spot_temp
         puts "#{red('Invalid Character!')} Enter a number between 0 and 8:"
         spot_temp = gets.chomp       
@@ -54,7 +53,7 @@ class Game
              
       spot = spot_temp.to_i
       puts "You chose: #{spot}"
-      if @board[spot] != "#{red('X')}" && @board[spot] != "#{green('O')}"
+      if @board[spot] != red('X') && @board[spot] != green('O')
         @board[spot] = @hum
       else
         spot = nil
@@ -70,7 +69,7 @@ class Game
         @board[spot] = @com
       else
         spot = get_best_move(@board, @com)
-        if @board[spot] != "#{red('X')}" && @board[spot] != "#{green('O')}"
+        if @board[spot] != red('X') && @board[spot] != green('O')
           @board[spot] = @com
         else
           spot = nil
@@ -83,7 +82,7 @@ class Game
     available_spaces = []
     best_move = nil
     board.each do |s|
-      if s != "#{red('X')}" && s != "#{green('O')}"
+      if s != red('X') && s != green('O')
         available_spaces << s
       end
     end
@@ -126,25 +125,25 @@ class Game
 
   def check_result(b)
     if
-      [b[0], b[1], b[2]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"] ||
-      [b[3], b[4], b[5]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"] ||
-      [b[6], b[7], b[8]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"] ||
-      [b[0], b[3], b[6]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"] ||
-      [b[1], b[4], b[7]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"] ||
-      [b[2], b[5], b[8]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"] ||
-      [b[0], b[4], b[8]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"] ||
-      [b[2], b[4], b[6]] == ["#{red('X')}", "#{red('X')}","#{red('X')}"]
+      [b[0], b[1], b[2]] == [red('X'), red('X'),red('X')] ||
+      [b[3], b[4], b[5]] == [red('X'), red('X'),red('X')] ||
+      [b[6], b[7], b[8]] == [red('X'), red('X'),red('X')] ||
+      [b[0], b[3], b[6]] == [red('X'), red('X'),red('X')] ||
+      [b[1], b[4], b[7]] == [red('X'), red('X'),red('X')] ||
+      [b[2], b[5], b[8]] == [red('X'), red('X'),red('X')] ||
+      [b[0], b[4], b[8]] == [red('X'), red('X'),red('X')] ||
+      [b[2], b[4], b[6]] == [red('X'), red('X'),red('X')]
 
         puts red(loser_sentences.sample)
     elsif  
-      [b[0], b[1], b[2]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
-      [b[3], b[4], b[5]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
-      [b[6], b[7], b[8]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
-      [b[0], b[3], b[6]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
-      [b[1], b[4], b[7]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
-      [b[2], b[5], b[8]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
-      [b[0], b[4], b[8]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"] ||
-      [b[2], b[4], b[6]] == ["#{green('O')}", "#{green('O')}","#{green('O')}"]
+      [b[0], b[1], b[2]] == [green('O'), green('O'),green('O')] ||
+      [b[3], b[4], b[5]] == [green('O'), green('O'),green('O')] ||
+      [b[6], b[7], b[8]] == [green('O'), green('O'),green('O')] ||
+      [b[0], b[3], b[6]] == [green('O'), green('O'),green('O')] ||
+      [b[1], b[4], b[7]] == [green('O'), green('O'),green('O')] ||
+      [b[2], b[5], b[8]] == [green('O'), green('O'),green('O')] ||
+      [b[0], b[4], b[8]] == [green('O'), green('O'),green('O')] ||
+      [b[2], b[4], b[6]] == [green('O'), green('O'),green('O')]
 
       puts green(winner_sentences.sample)
     else       
@@ -165,7 +164,7 @@ class Game
   end 
   
   def tie(b)
-    b.all? { |s| s == "#{red('X')}" || s == "#{green('O')}" }    
+    b.all? { |s| s == red('X') || s == green('O') }    
   end
 
 end
