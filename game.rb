@@ -57,6 +57,7 @@ class Game
         @board[spot] = @hum
       else
         spot = nil
+        puts "#{red('This number has already been used.')} Try another number between 0 and 8:"
       end      
     end
   end
